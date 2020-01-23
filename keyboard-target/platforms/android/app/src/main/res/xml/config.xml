@@ -20,11 +20,11 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
-    <icon src="./../../../../../../assets/art-and-design.png" />
     <icon density="mdpi" src="assets/art-and-design.png" />
     <icon density="ldpi" src="assets/art-and-design.png" />
     <icon density="hdpi" src="assets/art-and-design.png" />
     <icon density="xhdpi" src="assets/art-and-design.png" />
     <icon density="xxhdpi" src="assets/art-and-design.png" />
+    <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>

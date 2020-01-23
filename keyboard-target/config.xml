@@ -23,7 +23,7 @@
         <icon src="assets/art-and-design.png" density="hdpi" />
         <icon src="assets/art-and-design.png" density="xhdpi" />
         <icon src="assets/art-and-design.png" density="xxhdpi" />
-    <splash src="res/screen/android/splash-port-xhdpi.png" density="port-xhdpi"/>
+        <splash src="assets/art-and-design.png" density="port-xhdpi"/>
 
     </platform>
     <platform name="ios">
