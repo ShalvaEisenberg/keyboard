@@ -35,7 +35,7 @@ class Keyboard extends Component {
         if (this.props.Keyboard.progress === e.target.value) return
         else {
             this.props.Keyboard.progress = e.target.value
-            this.setState({ progress: 0 })
+            this.setState({ progress: 1 })
         }
     }
     newWord = () => {

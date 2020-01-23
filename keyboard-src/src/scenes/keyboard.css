@@ -274,6 +274,14 @@ label.cabinet input.file {
   direction: ltr;
   text-align: center;
 }
+
+.child-level-container .input-word{
+  font-size: 110%;
+  padding: 2%;
+  margin: 2%;
+  text-align: center;
+  direction: ltr;
+}
 .word-container {
   position: relative;
   /* padding: 2%;*/ /*--causes issues when compbined with trnfm-trnslt*/

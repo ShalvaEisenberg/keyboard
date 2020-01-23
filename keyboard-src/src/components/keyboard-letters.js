@@ -77,7 +77,7 @@ class KeyboardLetters extends Component {
       starLeft: xCoord,
       starAppear: this.props.upTo.toLowerCase() === char.toLowerCase() ? true : false
     })
-    
+
     let typedCorrectly = this.props.sendLetter(e)
     if (typedCorrectly) this.correctLtr.play()
     else return
@@ -140,7 +140,7 @@ class KeyboardLetters extends Component {
     let lang = this.setLangAndBoard()
     return (
       <div className="keyboard" ref={this.myInput}>
-        {this.state.starAppear && <img src={star} className="letter-star" style={{ top: this.state.starTop, left: this.state.starLeft }} />}
+        {this.state.starAppear && <img src={star} className="letter-star" style={{ top: this.state.starTop, left: this.state.starLeft, zIndex: "1000" }} />}
         <div className="keyboard__row">
           {lang.row1.map((item) => {
             let kl = ` key--letter `
