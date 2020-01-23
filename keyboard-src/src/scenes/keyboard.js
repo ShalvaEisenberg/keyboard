@@ -17,12 +17,12 @@ class Keyboard extends Component {
         super(props);
         this.state = {
             imgPath: "#",
-            inputWord: true,
+            inputWord: false,
             progress: 1,
             lettersRight: 0,
             lettersWrong: 0,
             complete: false,
-            word: "",
+            word: "dd",
             wordSoFar: "",
             upTo: "",
             valid: true
