@@ -27,11 +27,37 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <icon src="./assets/art-and-design.png" />
-        <icon src="assets/art-and-design.png" density="mdpi" />
-        <icon src="assets/art-and-design.png" density="ldpi" />
-        <icon src="assets/art-and-design.png" density="hdpi" />
-        <icon src="assets/art-and-design.png" density="xhdpi" />
-        <icon src="assets/art-and-design.png" density="xxhdpi" />
+        <!-- <icon src="./assets/art-and-design.png" /> -->
+        <!-- iOS 8.0+ -->
+        <!-- iPhone 6 Plus  -->
+        <icon src="./assets/Icon-180.png" width="180" height="180" />
+        <!-- iOS 7.0+ -->
+        <!-- iPhone / iPod Touch  -->
+        <icon src="./assets/Icon-60.png" width="60" height="60" />
+        <icon src="./assets/Icon-120.png" width="120" height="120" />
+        <!-- iPad -->
+        <icon src="./assets/Icon-76.png" width="76" height="76" />
+        <icon src="./assets/Icon-152.png" width="152" height="152" />
+        <!-- Spotlight Icon -->
+        <icon src="./assets/Icon-40.png" width="40" height="40" />
+        <icon src="./assets/Icon-80.png" width="80" height="80" />
+        <!-- iOS 6.1 -->
+        <!-- iPhone / iPod Touch -->
+        <icon src="./assets/Icon-57.png" width="57" height="57" />
+        <icon src="./assets/Icon-114.png" width="114" height="114" />
+        <!-- iPad -->
+        <icon src="./assets/Icon-72.png" width="72" height="72" />
+        <icon src="./assets/Icon-144.png" width="144" height="144" />
+        <!-- iPad Pro -->
+        <icon src="./assets/Icon-167.png" width="167" height="167" />
+        <!-- iPhone Spotlight and Settings Icon -->
+        <icon src="./assets/Icon-29.png" width="29" height="29" />
+        <icon src="./assets/Icon-58.png" width="58" height="58" />
+        <icon src="./assets/Icon-87.png" width="87" height="87" />
+        <!-- iPad Spotlight and Settings Icon -->
+        <icon src="./assets/Icon-50.png" width="50" height="50" />
+        <icon src="./assets/Icon-100.png" width="100" height="100" />
+        <!-- iPad Pro -->
+        <icon src="./assets/Icon-167.png" width="167" height="167" />
     </platform>
 </widget>
