@@ -1,0 +1,18 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.carmel6000.keyboard"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.carmel6000.keyboard"
+    }
+  },
+  "dependent_plugins": {}
+}

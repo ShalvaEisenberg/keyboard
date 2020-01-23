@@ -1,0 +1,202 @@
+.correct {
+  background-color: rgba(215, 253, 156, 0.705) !important;
+}
+.letter-star{
+  position: fixed;
+  width: 7vw;
+}
+.keyboard__row {
+  display: inline-block;
+  height: 3em;
+  margin: 0em;
+}
+
+/*neede*/
+.keyboard__row--h1 {
+  height: 1.7em;
+  line-height: 1.4em;
+}
+
+/*neede*/
+.keyboard__row--h3 {
+  height: 3.3em;
+}
+
+/*neede scss*/
+.keyboard__row > * {
+  position: relative;    
+  background: white;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  float: left;
+  border-radius: 0.3em;
+  margin: 0.2em;
+  padding: 0.2em;
+  width: 2.4em;
+  height: 2.4em;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-user-select: none;
+  border: 1px solid #444;
+  box-shadow: 0 0.2em 0 0.05em #222;
+  border-bottom-color: #555;
+}
+
+/*neede*/
+.keyboard__row--h1 > div {
+  width: 3.5em;
+}
+
+/*neede*/
+.keyboard__row > div[data-pressed],
+/*neede*/    .keyboard__row > div:active {
+  /* background: #8f0daf;
+  color: #aaa;
+  position: relative;
+  top: 0.2em;
+  box-shadow: 0 0 0 0.05em black;
+  transform: scale(1.25); */
+}
+
+.key--w3 {
+  width: 4.6em;
+}
+/* needed */
+.key--w4 {
+  width: 6em;
+}
+/* needed */
+.key--w5 {
+  width: 6.5em;
+}
+
+.key--w6 {
+  width: 8.3em;
+}
+
+.key--space {
+  width: 18em;
+}
+.delete {
+  background-color: rgb(206, 117, 44);
+  width: 4em;
+  position: absolute; 
+  right: 6%;   
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.3em;
+  margin: 0.2em;
+  padding: 0.2em;
+  width: 4em;
+  height: 2.4em;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-user-select: none;
+  border: 1px solid #444;
+  box-shadow: 0 0.2em 0 0.05em #222;
+  border-bottom-color: #555;
+}
+/* needed */
+.key--double > * {
+  padding-top: 0.1em;
+}
+/* needed */
+.key--letter {
+  line-height: 2.4em;
+}
+.chosen-wrong {
+background-color: rgb(255, 196, 169);
+}
+/* needed */
+.key--bottom-left > * {
+  position: absolute;
+  text-align: left;
+  bottom: 0.4em;
+  left: 0.4em;
+}
+
+.key--bottom-right > * {
+  position: absolute;
+  text-align: right;
+  bottom: 0.4em;
+  right: 0.4em;
+}
+
+.key--fn > * {
+  font-size: 0.6em;
+  line-height: 1em;
+  padding-top: 1.2em;
+  padding-right: 0.2em;
+  text-align: right;
+  float: right;
+}
+/* needed */
+.key--word > * {
+  font-size: 0.8em;
+}
+
+.key--arrow--tall > *,
+.key--arrow > * {
+  font-size: 0.5em;
+  line-height: 3em;
+}
+
+.key--arrow {
+  height: 1.8em;
+  margin-top: 1.7em;
+  line-height: 0.5em;
+}
+
+.key--arrow--tall > * {
+  padding-top: 0.2em;
+}
+
+.keyboard > .keyboard__row {
+  text-align: center;
+}
+.heb {
+  right: 0;
+  text-align: right;
+  direction: rtl;
+}
+
+/**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
