@@ -8,9 +8,7 @@ class Keyboard {
     wordsPerLevel = 3
 
     changeLang = (lang) => {
-        console.log("a this.lang: ", this.lang)
         this.lang = lang;
-        console.log("b this.lang: ", this.lang)
     }
 }
 

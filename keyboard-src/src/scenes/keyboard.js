@@ -1,4 +1,5 @@
 import { observer, inject } from 'mobx-react';
+import star from './../images/star.svg';
 import Confetti from './../images/confetti.webp';
 // import Confetti from './../images/confetti2.gif';
 import Upload from './../images/upload.png';
@@ -17,12 +18,12 @@ class Keyboard extends Component {
         super(props);
         this.state = {
             imgPath: "#",
-            inputWord: false,
+            inputWord: true,
             progress: 1,
             lettersRight: 0,
             lettersWrong: 0,
             complete: false,
-            word: "dd",
+            word: "",
             wordSoFar: "",
             upTo: "",
             valid: true
@@ -30,7 +31,13 @@ class Keyboard extends Component {
         this.levelComplete = new Audio(Cheers)
 
     }
-
+    updateLevel = (e) => {
+        if (this.props.Keyboard.progress === e.target.value) return
+        else {
+            this.props.Keyboard.progress = e.target.value
+            this.setState({ progress: 0 })
+        }
+    }
     newWord = () => {
         let newState = {}
         if (this.state.word.length < 2) { newState.valid = false }
@@ -97,7 +104,7 @@ class Keyboard extends Component {
                 this.setState(newState);
 
 
-            }, 1000);
+            }, 1400);
             return true;
         } else {
             //prob
@@ -109,6 +116,7 @@ class Keyboard extends Component {
     }
     progress = () => {
         let entireLevelComplete = false;
+
         let newState = {
             progress: this.state.progress + 1
         }
@@ -120,11 +128,14 @@ class Keyboard extends Component {
             }
 
             this.setState(newState)
-            this.props.Keyboard.progress = this.props.Keyboard.progress + 1 / this.props.Keyboard.wordsPerLevel;
+            this.props.Keyboard.progress = Math.floor(JSON.parse(this.props.Keyboard.progress) + (1 / this.props.Keyboard.wordsPerLevel))
+            console.log("this.props.Keyboard.progress", this.props.Keyboard.progress)
+            console.log("this.state.progress", this.state.progress)
             return entireLevelComplete;
         } else return entireLevelComplete// this.setState({ progress: this.state.progress - 1 })
     }
     closeGameOverModal = () => {
+        //are all these really necessary?
         this.setState({
             displayLevelUp: false,
             lettersRight: 0,
@@ -136,6 +147,23 @@ class Keyboard extends Component {
             wordSoFar: "",
             upTo: ""
         })
+    }
+    nextLevel = () => {
+        //are all these really necessary?
+        this.setState({
+            progress: 1,
+            displayLevelUp: false,
+            lettersRight: 0,
+            lettersWrong: 0,
+            imagePreviewUrl: null,
+            complete: false,
+            inputWord: true,
+            word: "",//new RandomWords({ exactly: 1, maxLength: 4 })[0],
+            wordSoFar: "",
+            upTo: "",
+
+        })
+        this.props.Keyboard.progress = this.props.Keyboard.progress + 1
     }
 
     setNewWord = (e) => {
@@ -165,7 +193,7 @@ class Keyboard extends Component {
         let imagePreview;
 
         if (this.state.imagePreviewUrl) {
-            imagePreview = (<img src={this.state.imagePreviewUrl} alt="icon" />);
+            imagePreview = (<img className="imgPreview" src={this.state.imagePreviewUrl} alt="icon" />);
         }
         return (
             <div className="keyboard-scene-container">
@@ -186,7 +214,7 @@ class Keyboard extends Component {
                 </div>
                 {this.state.complete &&
                     <div className="done-modal-container">
-                        <img src={Confetti} />
+                        <img src={star} className="star" />
                         <div className="done-modal">
                             {imagePreview}
                             <div>
@@ -197,9 +225,14 @@ class Keyboard extends Component {
                     </div>
                 }
                 {this.state.inputWord &&
-                    <div className="which-word-popup">  מילה להקלדה:
-                    <input type="text" maxLength="18" autoFocus className="input-word" onFocus={() => this.setState({ valid: true })} onBlur={(e) => this.setNewWord(e)} />
-                        {!this.state.valid && <div className="err-msg">נא להוסיף מילה להקלדה</div>}
+                    <div className="which-word-popup"><div><strong>  מילה להקלדה:</strong>
+                        <input type="text" maxLength="18" autoFocus className="input-word" onFocus={() => this.setState({ valid: true })} onBlur={(e) => this.setNewWord(e)} />
+                    </div> {!this.state.valid && <div className="err-msg">נא להוסיף מילה להקלדה</div>}
+
+                        <div className="child-level-container">
+                            <div className="child-level-text"><strong>רמת הילד:</strong></div>
+                            <input min="1" max="4" type="number" defaultValue={this.props.Keyboard.progress} className="input-word" onBlur={e => this.updateLevel(e)} />
+                        </div>
                         <div className="image-container">
                             {imagePreview}</div>
                         <label className="cabinet custom-file-input">
@@ -236,7 +269,7 @@ class Keyboard extends Component {
                     <div className="which-word-popup">
                         כל הכבוד!! הצלחת את השלב
 
-                        <button className="btn" onClick={this.closeGameOverModal}>לשלב הבא</button>
+                        <button className="btn" onClick={this.nextLevel}>לשלב הבא</button>
                     </div>
                 </div>
                 }

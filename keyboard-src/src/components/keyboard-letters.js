@@ -30,6 +30,37 @@ class KeyboardLetters extends Component {
 
   }
 
+  sendLetterNew = (e, char) => {
+    if (this.state.currCharObj && this.state.currCharObj === char)
+      return //to ensure no more clicks while green
+    //prob
+    let heightProportion = this.myInput.current.offsetHeight / window.innerHeight
+    let widthProportion = this.myInput.current.offsetWidth / window.innerWidth
+
+    let rect = e.target.getBoundingClientRect();
+    let xCoord = Math.floor(rect.left * widthProportion)
+    let yCoord = Math.floor(rect.top * heightProportion)
+
+    let newState = { currCharObj: char }
+
+    let typedCorrectly = this.props.sendLetter(e)
+    if (typedCorrectly) {
+      this.correctLtr.play();
+      newState.starTop = yCoord - 60;
+      newState.starLeft = xCoord
+    }
+
+    this.setState(newState)
+
+    setTimeout(() => {
+      //prob
+      this.setState({
+        currCharObj: "",
+        starTop: null,
+        starLeft: null
+      })
+    }, 1400);
+  }
   sendLetter = (e, char) => {
     if (this.state.currCharObj && this.state.currCharObj === char) return //to ensure no more clicks while green
     //prob
@@ -39,16 +70,27 @@ class KeyboardLetters extends Component {
     let rect = e.target.getBoundingClientRect();
     let xCoord = Math.floor(rect.left * widthProportion)
     let yCoord = Math.floor(rect.top * heightProportion)
-    console.log(yCoord, xCoord)
-    this.setState({ currCharObj: char, starTop: yCoord - 60 , starLeft: xCoord , starAppear: true })
-    let x = this.props.sendLetter(e)
-    if (x) this.correctLtr.play()
+
+    this.setState({
+      currCharObj: char,
+      starTop: yCoord - 60,
+      starLeft: xCoord,
+      starAppear: this.props.upTo.toLowerCase() === char.toLowerCase() ? true : false
+    })
+    
+    let typedCorrectly = this.props.sendLetter(e)
+    if (typedCorrectly) this.correctLtr.play()
     else return
 
     setTimeout(() => {
       //prob
-      this.setState({ currCharObj: "", starAppear: false })
-    }, 1000);
+      this.setState({
+        currCharObj: "",
+        starTop: null,
+        starLeft: null,
+        starAppear: false
+      })
+    }, 1400);
   }
 
   setLang = () => {

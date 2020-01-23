@@ -23,6 +23,8 @@
         <icon src="assets/art-and-design.png" density="hdpi" />
         <icon src="assets/art-and-design.png" density="xhdpi" />
         <icon src="assets/art-and-design.png" density="xxhdpi" />
+    <splash src="res/screen/android/splash-port-xhdpi.png" density="port-xhdpi"/>
+
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -59,5 +61,17 @@
         <icon src="./assets/Icon-100.png" width="100" height="100" />
         <!-- iPad Pro -->
         <icon src="./assets/Icon-167.png" width="167" height="167" />
+
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="/assets/Icon-256.png" width="320" height="480"/>
+        <splash src="/assets/Icon-512.png" width="1024" height="768"/>
+        <splash src="/assets/Icon-512.png" width="640" height="960"/>
+        <splash src="/assets/Icon-1024.png" width="768" height="1024"/>
+        <splash src="/assets/Icon-1024.png" width="2208" height="1242"/>
+        <splash src="/assets/Icon-1024.png" width="2048" height="1536"/>
+        <splash src="/assets/Icon-1024.png" width="640" height="1136"/>
+        <splash src="/assets/Icon-1024.png" width="750" height="1334"/>
+        <splash src="/assets/Icon-1024.png" width="1536" height="2048"/>
+        <splash src="/assets/Icon-1024.png" width="1242" height="2208"/>
     </platform>
 </widget>
