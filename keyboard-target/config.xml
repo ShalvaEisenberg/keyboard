@@ -27,6 +27,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <icon src="./../assets/art-and-design.png" />
         <icon src="assets/art-and-design.png" density="mdpi" />
         <icon src="assets/art-and-design.png" density="ldpi" />
         <icon src="assets/art-and-design.png" density="hdpi" />

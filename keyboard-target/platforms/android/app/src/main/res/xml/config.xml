@@ -20,6 +20,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
+    <icon src="./../../../../../../assets/art-and-design.png" />
     <icon density="mdpi" src="assets/art-and-design.png" />
     <icon density="ldpi" src="assets/art-and-design.png" />
     <icon density="hdpi" src="assets/art-and-design.png" />

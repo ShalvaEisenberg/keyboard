@@ -1,9 +1,10 @@
 {
-  "main.css": "static/css/main.9e9e1be3.css",
-  "main.css.map": "static/css/main.9e9e1be3.css.map",
-  "main.js": "static/js/main.86c00bef.js",
-  "main.js.map": "static/js/main.86c00bef.js.map",
+  "main.css": "static/css/main.24e31298.css",
+  "main.css.map": "static/css/main.24e31298.css.map",
+  "main.js": "static/js/main.0bcc0d99.js",
+  "main.js.map": "static/js/main.0bcc0d99.js.map",
   "static/media/A.mp3": "static/media/A.5a9481f3.mp3",
   "static/media/confetti.webp": "static/media/confetti.f5575408.webp",
-  "static/media/correct.wav": "static/media/correct.59460284.wav"
+  "static/media/correct.wav": "static/media/correct.59460284.wav",
+  "static/media/star.svg": "static/media/star.db6b4396.svg"
 }
