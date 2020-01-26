@@ -140,17 +140,17 @@ class KeyboardLetters extends Component {
     let lang = this.setLangAndBoard()
     return (
       <div className="keyboard" ref={this.myInput}>
-        {this.state.starAppear && <img src={star} className="letter-star" style={{ top: this.state.starTop, left: this.state.starLeft, zIndex: "1000" }} />}
+        {this.state.starAppear && <img alt={this.props.Keyboard.word} src={star} className="letter-star" style={{ top: this.state.starTop, left: this.state.starLeft, zIndex: "1000" }} />}
         <div className="keyboard__row">
           {lang.row1.map((item) => {
             let kl = ` key--letter `
-            let x = this.props.upTo == item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo == item.char.toLowerCase() && ` correct `
+            let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
+            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj == item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x + y : kl + y}
               data-char={item.char}>
               {item.appear ? item.char : ''}</div>
           })}
@@ -160,13 +160,13 @@ class KeyboardLetters extends Component {
         <div className="keyboard__row">
           {lang.row2.map((item) => {
             let kl = ` key--letter `
-            let x = this.props.upTo == item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo == item.char.toLowerCase() && ` correct `
+            let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
+            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj == item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x + y : kl + y}
               data-char={item.char}>
               {item.appear ? item.char : ''}</div>
           })}
@@ -177,13 +177,13 @@ class KeyboardLetters extends Component {
         <div className="keyboard__row">
           {lang.row3.map((item) => {
             let kl = ` key--letter `
-            let x = this.props.upTo == item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo == item.char.toLowerCase() && ` correct `
+            let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
+            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj == item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x + y : kl + y}
               data-char={item.char}>
               {item.appear ? item.char : ''}</div>
           })}

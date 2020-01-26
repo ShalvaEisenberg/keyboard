@@ -36,7 +36,7 @@ class App extends Component {
       else high = avg;
 
       console.log(avg)
-      if (sqrtN == avg) something = false
+      if (sqrtN === avg) something = false
     }
   }
 

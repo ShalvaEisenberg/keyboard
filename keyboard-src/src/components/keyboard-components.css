@@ -171,70 +171,96 @@
 @-webkit-keyframes float-up {
   0% {
     opacity: 0.5;
-    width: 4vw;
+    width: 2vw;
   }
   10% {
     opacity: 1;
+  }  73% {
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
+    transform: translate(-50%, -50%);
+    width: 6.5vw;
+    opacity: 1;
   }
   30% {
-    top: -5vh;
-    left: 40vw;
+    top: -2.5vh;
+    left: 20vw;
   }
   35% {
-    top: -5vh;
-    left: 40vw;
+    top: -2.5vh;
+    left: 20vw;
   }
   55% {
-    top: -10vh;
-    left: 25vw;
+    top: -5vh;
+    left: 12.5vw;
+  }
+  73% {
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
+    transform: translate(-50%, -50%);
+    width: 6.5vw;
+    opacity: 1;
   }
   80% {
-    top: -15vh;
-    left: 29vw; /*calc(50vw-50px);*/
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
     transform: translate(-50%, -50%);
-    width: 13vw;
+    width: 6.5vw;
     opacity: 1;
   }
   100% {
     top: -15vh;
-    left:35vw;
+    left:17.5vw;
     transform: translate(-50%, -50%);
-    width: 34vw;
+    width: 24vw;
     opacity: 0;
   }
 }
 @keyframes float-up {
   0% {
     opacity: 0.5;
-    width: 4vw;
+    width: 2vw;
   }
   10% {
     opacity: 1;
+  }  73% {
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
+    transform: translate(-50%, -50%);
+    width: 6.5vw;
+    opacity: 1;
   }
   30% {
-    top: -5vh;
-    left: 40vw;
+    top: -2.5vh;
+    left: 20vw;
   }
   35% {
-    top: -5vh;
-    left: 40vw;
+    top: -2.5vh;
+    left: 20vw;
   }
   55% {
-    top: -10vh;
-    left: 25vw;
+    top: -5vh;
+    left: 12.5vw;
+  }
+  73% {
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
+    transform: translate(-50%, -50%);
+    width: 6.5vw;
+    opacity: 1;
   }
   80% {
-    top: -15vh;
-    left: 29vw; /*calc(50vw-50px);*/
+    top: -7.5vh;
+    left: 14.5vw; /*calc(50vw-50px);*/
     transform: translate(-50%, -50%);
-    width: 13vw;
+    width: 6.5vw;
     opacity: 1;
   }
   100% {
     top: -15vh;
-    left:35vw;
+    left:17.5vw;
     transform: translate(-50%, -50%);
-    width: 34vw;
+    width: 24vw;
     opacity: 0;
   }
 }

@@ -5597,7 +5597,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'keyboard', ref: this.myInput },
-	        this.state.starAppear && _react2.default.createElement('img', { src: _star2.default, className: 'letter-star', style: { top: this.state.starTop, left: this.state.starLeft } }),
+	        this.state.starAppear && _react2.default.createElement('img', { src: _star2.default, className: 'letter-star', style: { top: this.state.starTop, left: this.state.starLeft, zIndex: "1000" } }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'keyboard__row' },
@@ -6284,6 +6284,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import Confetti from './../images/confetti.webp';
+	
 	// import Confetti from './../images/confetti2.gif';
 	
 	
@@ -6297,8 +6299,8 @@
 	
 	        _this.updateLevel = function (e) {
 	            if (_this.props.Keyboard.progress === e.target.value) return;else {
-	                _this.props.Keyboard.progress = e.target.value;
-	                _this.setState({ progress: 0 });
+	                _this.props.Keyboard.progress = e.target.value > 4 ? 4 : e.target.value;
+	                _this.setState({ progress: 1 });
 	            }
 	        };
 	
@@ -6549,7 +6551,7 @@
 	                        _react2.default.createElement(
 	                            'strong',
 	                            null,
-	                            '  \u05DE\u05D9\u05DC\u05D4 \u05DC\u05D4\u05E7\u05DC\u05D3\u05D4:'
+	                            '  \u05DE\u05D9\u05DC\u05D4 \u05DC\u05D4\u05E7\u05DC\u05D3\u05D4:*'
 	                        ),
 	                        _react2.default.createElement('input', { type: 'text', maxLength: '18', autoFocus: true, className: 'input-word', onFocus: function onFocus() {
 	                                return _this2.setState({ valid: true });
@@ -6563,6 +6565,7 @@
 	                        { className: 'err-msg' },
 	                        '\u05E0\u05D0 \u05DC\u05D4\u05D5\u05E1\u05D9\u05E3 \u05DE\u05D9\u05DC\u05D4 \u05DC\u05D4\u05E7\u05DC\u05D3\u05D4'
 	                    ),
+	                    !this.state.valid && _react2.default.createElement('hr', null),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'child-level-container' },
@@ -6579,6 +6582,7 @@
 	                                return _this2.updateLevel(e);
 	                            } })
 	                    ),
+	                    _react2.default.createElement('hr', null),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'image-container' },
@@ -6588,7 +6592,7 @@
 	                        'label',
 	                        { className: 'cabinet custom-file-input' },
 	                        _react2.default.createElement('img', { src: _upload2.default }),
-	                        '\u05DC\u05D4\u05E2\u05DC\u05D0\u05EA \u05EA\u05DE\u05D5\u05E0\u05D4',
+	                        this.state.imagePreviewUrl ? "שנה תמונה" : "להעלאת תמונה",
 	                        _react2.default.createElement('input', { type: 'file', value: '', title: '', className: 'file', onChange: this.fileChangedHandler })
 	                    ),
 	                    _react2.default.createElement(
@@ -6629,7 +6633,7 @@
 	                this.state.displayLevelUp && _react2.default.createElement(
 	                    'div',
 	                    { className: 'done-modal-container' },
-	                    _react2.default.createElement('img', { src: _confetti2.default }),
+	                    _react2.default.createElement('img', { src: _confetti2.default, width: '100vw', height: '100vh' }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'which-word-popup' },
@@ -8238,7 +8242,7 @@
 /* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "static/media/confetti.f5575408.webp";
+	module.exports = __webpack_require__.p + "static/media/confetti1.cf506d69.gif";
 
 /***/ },
 /* 33 */
@@ -8718,4 +8722,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.110648c7.js.map
+//# sourceMappingURL=main.e90ba9cd.js.map

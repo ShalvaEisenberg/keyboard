@@ -25,6 +25,6 @@
     <icon density="hdpi" src="assets/art-and-design.png" />
     <icon density="xhdpi" src="assets/art-and-design.png" />
     <icon density="xxhdpi" src="assets/art-and-design.png" />
-    <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+    <splash density="port-xhdpi" src="assets/art-and-design.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>

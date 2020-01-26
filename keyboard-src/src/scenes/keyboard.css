@@ -1,3 +1,7 @@
+hr {
+  background-color: white;
+  width: 100%;
+}
 .info-box {
   position: fixed;
   top: 4.5%;
@@ -169,12 +173,12 @@ label.cabinet input.file {
   box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.5);
 }
 .which-word-popup input[type="text"] {
-  padding: 0;
   font-size: 110%;
   padding: 2%;
-  width: 30vw;
+  width: 100%;
   margin: auto;
   text-align: right;
+  box-sizing: border-box;
 }
 .which-word-popup {
   position: fixed;
