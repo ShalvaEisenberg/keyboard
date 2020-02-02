@@ -1,8 +1,9 @@
 // source: https://codepen.io/gschier/pen/VKgyaY
 import { observer, inject } from 'mobx-react';
 import React, { Component } from 'react';
-import soundC from './../images/correct.wav';
-import star from './../images/star.svg';
+import soundC from './../media/correct.wav';
+import Click from './../media/click.wav';
+import star from './../media/star.svg';
 import './keyboard-components.css';
 
 class KeyboardLetters extends Component {
@@ -26,10 +27,13 @@ class KeyboardLetters extends Component {
       row3: [{ char: 'ئ', appear: false }, { char: 'ء', appear: false }, { char: 'ؤ', appear: false }, { char: 'ر', appear: false }, { char: 'ﻻ', appear: false }, { char: 'ى', appear: false }, { char: 'ة', appear: false }, { char: 'و', appear: false }, { char: 'ز', appear: false }, { char: 'ظ', appear: false }]
     }
     this.correctLtr = new Audio(soundC);
+    this.click = new Audio(Click);
     this.myInput = React.createRef()
 
   }
-
+  componentWillUnmount() {
+    this.click.pause()
+  }
   sendLetterNew = (e, char) => {
     if (this.state.currCharObj && this.state.currCharObj === char)
       return //to ensure no more clicks while green
@@ -45,6 +49,7 @@ class KeyboardLetters extends Component {
 
     let typedCorrectly = this.props.sendLetter(e)
     if (typedCorrectly) {
+      this.click.pause()
       this.correctLtr.play();
       newState.starTop = yCoord - 60;
       newState.starLeft = xCoord
@@ -62,8 +67,10 @@ class KeyboardLetters extends Component {
     }, 1400);
   }
   sendLetter = (e, char) => {
+    this.click.play();
+
     if (this.state.currCharObj && this.state.currCharObj === char) return //to ensure no more clicks while green
-    //prob
+
     let heightProportion = this.myInput.current.offsetHeight / window.innerHeight
     let widthProportion = this.myInput.current.offsetWidth / window.innerWidth
 
@@ -71,14 +78,15 @@ class KeyboardLetters extends Component {
     let xCoord = Math.floor(rect.left * widthProportion)
     let yCoord = Math.floor(rect.top * heightProportion)
 
+    let doesStarAppear = char == "_" ? true : this.props.upTo.toLowerCase() === char.toLowerCase() ? true : false
     this.setState({
       currCharObj: char,
       starTop: yCoord - 60,
       starLeft: xCoord,
-      starAppear: this.props.upTo.toLowerCase() === char.toLowerCase() ? true : false
+      starAppear: doesStarAppear ? true : false
     })
 
-    let typedCorrectly = this.props.sendLetter(e)
+    let typedCorrectly = this.props.sendLetter(e.currentTarget.textContent.toLowerCase())
     if (typedCorrectly) this.correctLtr.play()
     else return
 
@@ -145,14 +153,13 @@ class KeyboardLetters extends Component {
           {lang.row1.map((item) => {
             let kl = ` key--letter `
             let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj === item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x : kl}
               data-char={item.char}>
-              {item.appear ? item.char : ''}</div>
+              {item.appear ? item.char : ' '}</div>
           })}
 
         </div>
@@ -161,12 +168,11 @@ class KeyboardLetters extends Component {
           {lang.row2.map((item) => {
             let kl = ` key--letter `
             let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj === item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x : kl}
               data-char={item.char}>
               {item.appear ? item.char : ''}</div>
           })}
@@ -178,16 +184,22 @@ class KeyboardLetters extends Component {
           {lang.row3.map((item) => {
             let kl = ` key--letter `
             let x = this.props.upTo === item.char.toLowerCase() ? ` ${kl} chosen-right ` : ` ${kl} chosen-wrong `
-            let y = this.props.upTo === item.char.toLowerCase() && Math.floor(this.props.Keyboard.progress) < 3 ? ` correct ` : ` `
 
             return <div
               key={item.char}
               onClick={(e) => this.sendLetter(e, item.char)}
-              className={this.state.currCharObj === item.char ? x + y : kl + y}
+              className={this.state.currCharObj === item.char ? x : kl}
               data-char={item.char}>
               {item.appear ? item.char : ''}</div>
           })}
-          <div className="key--double" data-key="191">
+          {/* <div className="key--double" data-key="191">
+          </div> */}
+        </div><br />
+        <div className="keyboard__row">
+          <div
+            style={{ color: 'white' }}
+            className={`key--double key--right key--space ` + (e => this.props.upTo.toLowerCase() === e.currentTarget.textContent.toLowerCase() ? ` chosen-right ` : `  `)}
+            onClick={(e) => this.sendLetter(e, "_")} data-key="32" data-char=" ">{/*&nbsp;*/"_"}
           </div>
         </div>
       </div>

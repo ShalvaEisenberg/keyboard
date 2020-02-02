@@ -1,10 +1,7 @@
 import { observer, inject } from 'mobx-react';
-import star from './../images/star.svg';
-// import Confetti from './../images/confetti.webp';
-import Confetti from './../images/confetti1.gif';
-// import Confetti from './../images/confetti2.gif';
-import Upload from './../images/upload.png';
-import Cheers from './../images/A.mp3';
+import star from './../media/star.svg';
+import Upload from './../media/upload.png';
+import Cheers from './../media/A.mp3';
 import React, { Component } from 'react';
 import KeyboardLetters from './../components/keyboard-letters'
 import KeyboardTopRows from './../components/keyboard-top-rows'
@@ -31,6 +28,10 @@ class Keyboard extends Component {
         }
         this.levelComplete = new Audio(Cheers)
 
+    }
+
+    componentWillMount(){
+        this.levelComplete.pause()
     }
     updateLevel = (e) => {
         if (this.props.Keyboard.progress === e.target.value) return
@@ -78,32 +79,30 @@ class Keyboard extends Component {
         reader.readAsDataURL(event.target.files[0])
     }
 
-    sendLetter = (e) => {
+    sendLetter = (typedLtr) => {
         if (this.state.word.length < 1) {
             this.setState({ inputWord: true })
             return;
         }
-        let typedLtr = e.currentTarget.textContent.toLowerCase();
 
         let newState = {};
 
         if (typedLtr === this.state.word[this.state.wordSoFar.length]) {
+            // typedLtr = typedLtr == " " ? "_" : typedLtr
             let wordSoFar = this.state.wordSoFar + typedLtr
+
             setTimeout(() => {
                 newState = {
                     upTo: this.state.word[this.state.wordSoFar.length + 1],
                     wordSoFar,
                     lettersRight: this.state.lettersRight + 1,
-
                 }
                 if (this.state.word === wordSoFar) {
                     let entireLevelComplete = this.progress()
                     if (!entireLevelComplete) newState.complete = true
                 }
 
-                //prob
                 this.setState(newState);
-
 
             }, 1400);
             return true;
@@ -124,14 +123,13 @@ class Keyboard extends Component {
         if ((this.state.lettersRight / this.state.lettersWrong) > 0.75 && this.state.progress < 8) { // 8 is num of letters on keyboard... must change!!
             if (this.state.progress === this.props.Keyboard.wordsPerLevel) {
                 this.levelComplete.play();
+                window.confetti.start(5000)
                 newState.displayLevelUp = true;
                 entireLevelComplete = true;
             }
 
             this.setState(newState)
             this.props.Keyboard.progress = Math.floor(JSON.parse(this.props.Keyboard.progress) + (1 / this.props.Keyboard.wordsPerLevel))
-            console.log("this.props.Keyboard.progress", this.props.Keyboard.progress)
-            console.log("this.state.progress", this.state.progress)
             return entireLevelComplete;
         } else return entireLevelComplete// this.setState({ progress: this.state.progress - 1 })
     }
@@ -166,11 +164,25 @@ class Keyboard extends Component {
         })
         this.props.Keyboard.progress = this.props.Keyboard.progress + 1
     }
+    checkIfValid = (word) => {
+        let isValid = true
+        if (word.length < 2) isValid = false;
 
+        var format = /[1-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+        if (format.test(word)) isValid = false
+
+        let formattedWord = word;
+
+        if (word.includes(" ")) { formattedWord = word.replace(/ /g, "_"); /*return [true, word]*/ }
+
+        return [isValid, formattedWord];
+    }
     setNewWord = (e) => {
-        let word = e && e.target.value ? e.target.value.toLowerCase() : this.state.word;
+        let input = e && e.target.value ? e.target.value.toLowerCase() : this.state.word;
+        let [valid, word] = this.checkIfValid(input)
         this.setState({
-            valid: word.length > 1 ? true : false,
+            valid,
             word,
             wordSoFar: "",
             upTo: word.charAt(0)
@@ -213,40 +225,6 @@ class Keyboard extends Component {
                     </div>
                     {/* } */}
                 </div>
-                {this.state.complete &&
-                    <div className="done-modal-container">
-                        <img alt={this.state.word} src={star} className="star" />
-                        <div className="done-modal">
-                            {imagePreview}
-                            <div>
-                                אני רוצה {this.state.word}!
-                            </div>
-                            <button className="btn" onClick={this.closeGameOverModal}>עוד מילה!</button>
-                        </div>
-                    </div>
-                }
-                {this.state.inputWord &&
-                    <div className="which-word-popup"><div><strong>  מילה להקלדה:*</strong>
-                        <input type="text" maxLength="18" autoFocus className="input-word" onFocus={() => this.setState({ valid: true })} onBlur={(e) => this.setNewWord(e)} />
-                    </div> {!this.state.valid && <div className="err-msg">נא להוסיף מילה להקלדה</div>}
-                        {!this.state.valid && <hr />}
-                        <div className="child-level-container">
-                            <div className="child-level-text"><strong>רמת הילד:</strong></div>
-                            <input min="1" max="4" type="number" defaultValue={this.props.Keyboard.progress} className="input-word" onBlur={e => this.updateLevel(e)} />
-                        </div>
-                        {/* {this.state.imagePreviewUrl &&  */}
-                        <hr />
-                         {/* } */}
-                        <div className="image-container">
-                            {imagePreview}</div>
-                        <label className="cabinet custom-file-input">
-                            <img alt={this.state.word} src={Upload} />
-                            {this.state.imagePreviewUrl ? "שנה תמונה" : "להעלאת תמונה"}
-                            <input type="file" value="" title="" className="file" onChange={this.fileChangedHandler} />
-                        </label>
-                        <button className="done-btn" onClick={this.newWord}>סיום</button>
-                    </div>}
-
 
                 {showImg && imagePreview}
                 {!this.state.complete && <div>
@@ -268,14 +246,55 @@ class Keyboard extends Component {
                         {/* <KeyboardSideKeys/> */}
                     </div>
                 </div>}
-                {this.state.displayLevelUp && <div className="done-modal-container">
-                    <img alt={this.state.word} src={Confetti} width="100vw" height="100vh" />
-                    <div className="which-word-popup">
-                        כל הכבוד!! הצלחת את השלב
+
+                {/*  */}
+                {/* -*-*-*-*-*-POPUPS-*-*-*-*-*-POPUPS-*-*-*-*-*-POPUPS-*-*-*-*-*-POPUPS-*-*-*-*-*- */}
+                {/*  */}
+                {
+                    this.state.complete &&
+                    <div className="done-modal-container">
+                        <img alt={this.state.word} src={star} className="star" />
+                        <div className="done-modal">
+                            {imagePreview}
+                            <div>
+                                אני רוצה {this.state.word}!
+                            </div>
+                            <button className="btn" onClick={this.closeGameOverModal}>עוד מילה!</button>
+                        </div>
+                    </div>
+                }
+                {
+                    this.state.inputWord &&
+                    <div className="which-word-popup"><div><strong>  מילה להקלדה:*</strong>
+
+                        <input type="text" maxLength="18" autoFocus className="input-word" onFocus={() => this.setState({ valid: true })} onBlur={(e) => this.setNewWord(e)} />
+                    </div> {!this.state.valid && <div className="err-msg">נא להוסיף מילה להקלדה</div>}
+                        {!this.state.valid && <hr />}
+                        <div className="child-level-container">
+                            <div className="child-level-text"><strong>רמת הילד:</strong></div>
+                            <input min="1" max="4" type="number" defaultValue={this.props.Keyboard.progress} className="input-word" onBlur={e => this.updateLevel(e)} />
+                        </div>
+                        {/* {this.state.imagePreviewUrl &&  */}
+                        <hr />
+                        {/* } */}
+                        <div className="image-container">
+                            {imagePreview}</div>
+                        <label className="cabinet custom-file-input">
+                            <img alt={this.state.word} src={Upload} />
+                            {this.state.imagePreviewUrl ? "שנה תמונה" : "להעלאת תמונה"}
+                            <input type="file" value="" title="" className="file" onChange={this.fileChangedHandler} />
+                        </label>
+                        <button className="done-btn" onClick={this.newWord}>סיום</button>
+                    </div>
+                }
+                {
+                    this.state.displayLevelUp && <div className="done-modal-container">
+                        <div className="which-word-popup">
+                            כל הכבוד!! הצלחת את השלב
 
                         <button className="btn" onClick={this.nextLevel}>לשלב הבא</button>
+                        </div>
                     </div>
-                </div>
                 }
             </div>);
     }
